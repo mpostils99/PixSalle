@@ -1,0 +1,80 @@
+{% extends "base.twig" %}
+
+{% block title %} Albums | PixSalle {% endblock %}
+
+{% block main %}
+    
+    <h1> Album images </h1>
+    
+    <form data-cy="sign-in" action="{{ formAction }}" method="POST">
+
+        
+        <div class="container-pictures">
+
+        {% if pictures %}
+            <br><span style="color: grey"> If you want to delete photos, mark them and press the delete button below.</span>
+            {% for picture in pictures %}
+                <div class="pictures">
+                    <img src="{{ picture.url}}" alt="pepa" style="width:720px;height:500px;">
+                    {% if userType == "Active" %}
+                        <input type="checkbox" value="{{ picture.id }}" name="picture[]" class="ch1">
+                    {% endif %}
+                </div> 
+            {% endfor %}
+        
+        </div> 
+
+            {% if userType == "Active" %}
+            <div class="container-upload-photos">
+                    <div class="container">
+                        <div class="button">
+                            <input data-cy="sign-in__btn" name="delete-photo" type="submit" value="DELETE IMAGE(S)" class="deleteBtn">
+                        </div>
+                    </div>  
+            </div>
+            {% endif %}
+
+        {% endif %}
+
+        {% if userType == "Active" %}
+            <div class="container-upload-photos">
+                <h3> Do you want to upload a picture? </h3>
+                    <div class="container">
+                        <div class="name"> 
+                            <input data-cy="sign-in__email" type="text" name="photo-url" placeholder="Enter the URL of the image" size="30">
+                        </div>
+                        <div class="button">
+                            <input data-cy="sign-in__btn" name="upload" type="submit" value="UPLOAD" class="createbtn">
+                        </div>
+                    </div>  
+            </div>
+
+            <div class="container-upload-photos">
+                <h3> Do you want to share the album? </h3>
+                    <div class="container">
+                        <div class="button">
+                            <input data-cy="sign-in__btn" name="share-album" type="submit" value="SHOW QR" class="createbtn">
+                        </div>
+                    </div>  
+            </div>
+
+            {% if qr %}
+                <img src="/{{ qr }}" alt="qr">
+
+            {% endif %}
+
+
+
+            <div class="container-upload-photos">
+                <h3> Do you want to delete this album? </h3>
+                <div class="container">
+                    <div class="button">
+                        <input data-cy="sign-in__btn" name="delete-album" type="submit" value="DELETE ALBUM" class="deleteBtn">
+                    </div>
+                </div>  
+            </div>
+        {% endif %}
+    
+    </form>  
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.twig" %}
+
+{% block title %}Wallet | PixSalle{% endblock %}
+
+{% block main %}
+<h1 id = "welcome" data-cy="home__welcomeMsg">Hello {{ username }}!</h1>
+<h1 id = "welcome" data-cy="home__welcomeMsg">Your current money is: {{ money }}</h1>
+
+<form action="{{ formAction }}" method="POST">
+    <p>Add money</p>
+    <div class="wallet">
+    <input type="text" name="money" placeholder="Enter the amount of money" size="10" >
+    {% if formErrors['money'] %}
+          <span style="color: red"> {{ formErrors['money'] }} </span>
+        {% endif %}
+    <input type="submit" value="Add">
+    </div>
+</form>
+
+{% endblock %}

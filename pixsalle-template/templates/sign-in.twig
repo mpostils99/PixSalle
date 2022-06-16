@@ -1,0 +1,30 @@
+{% extends "base.twig" %}
+
+{% block title %} Sign-in | PixSalle {% endblock %}
+
+{% block main %}
+
+  <h1>Sign In to PixSalle</h1>
+  <form data-cy="sign-in" action="{{ formAction }}" method="POST">
+    <div class="container">
+      <div class="email"> 
+        <input data-cy="sign-in__email" type="text" name="email" placeholder="Enter your email" size="30">
+        {% if formErrors['email'] %}
+          <span data-cy="sign-in__wrongEmail" style="color: red">{{ formErrors['email'] }}</span>
+        {% endif %}
+      </div>
+      <div class="password">
+        <input data-cy="sign-in__password" type="password" name="password" placeholder="Enter your password" size="30">
+        {% if formErrors['password'] %}
+          <span data-cy="sign-in__wrongPassword" style="color: red">{{ formErrors['password'] }}</span>
+        {% endif %}
+      </div>
+      <div class="button">
+        <input data-cy="sign-in__btn" type="submit" value="SIGN IN" class="loginbtn">
+      </div>
+    </div>
+  </form>
+  
+  
+
+{% endblock %}

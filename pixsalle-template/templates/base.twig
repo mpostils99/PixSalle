@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}{% endblock %}</title>
+    {% block head %}
+      <link rel="stylesheet" href="/../assets/css/styles.css">
+    {% endblock %}
+  </head>
+  <body>
+      <header>
+      {% block header %}
+
+        <nav class="stroke">
+          <ul>
+            <li><a {% if userWeb == 'landing' %} id="toca" {% endif %}  class="selected" href="{{ url_for('landing-page')}}"> LANDING PAGE </a></li>
+            {% if loggedIn == true %}
+              <li><a {% if userWeb == 'portfolio' %} id="toca" {% endif %} href="{{ url_for('portfolio') }}"> PORTFOLIO </a></li>
+              <li><a {% if userWeb == 'blogs' %} id="toca" {% endif %} href="{{ url_for('blog') }}"> BLOGS </a></li>
+              <li><a {% if userWeb == 'explore' %} id="toca" {% endif %} href="{{ url_for('explore') }}"> EXPLORE </a></li>
+              <li><a {% if userWeb == 'wallet' %} id="toca" {% endif %} href="{{ url_for('wallet') }}"> WALLET </a></li>
+              <li><a {% if userWeb == 'membership' %} id="toca" {% endif %} href="{{ url_for('membership') }}"> MEMBERSHIP </a></li>
+              <li><a {% if userWeb == 'profile' %} id="toca" {% endif %} href="{{ url_for('profile') }}"> PROFILE </a></li>
+              <li><p id="userInfo" >{{formData.userName}} ({{formData.money}} €)</p>  
+              </li>
+              &nbsp
+              &nbsp
+              <button class="logOutbtn"   onclick="window.location.href='{{ url_for('signIn') }}'">logOut</button>
+             {# <li>{{formData.userName}}</li> #}
+            {% else %}
+              <li><a {% if userWeb == 'signIn' %} id="toca" {% endif %} href="{{ url_for('signIn') }}"> SIGN IN </a></li>
+              <li><a {% if userWeb == 'signUp' %} id="toca" {% endif %} href="{{ url_for('signUp') }}"> SIGN UP </a></li>
+              
+            {% endif %}
+          </ul>
+        </nav>
+
+        {% endblock %}
+      </header>
+      <main>
+        {% block main %}{% endblock %}
+      </main>
+      <footer>
+        {% block footer %}
+
+        <div>
+          <p> © All Rights Reserved by <a href="{{ url_for('landing-page') }}"> PixSalle </a> </p>
+        </div>
+        
+        {% endblock %}
+
+      </footer>
+  </body>
+</html>

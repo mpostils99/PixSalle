@@ -1,0 +1,22 @@
+{% extends "base.twig" %}
+
+{% block title %}Explore | PixSalle{% endblock %}
+
+{% block main %}
+
+    <h1> Pictures list </h1>
+
+     <div class="container-pictures">
+        {% if pictures %}
+            {% for picture in pictures %}
+                <div class="pictures">
+                    <img src={{ picture.url }} alt='img' style="width:720px;height:500px;">
+                    <span> Author: {{ picture.userName }} </span>
+                </div>
+            {% endfor %}
+        {% else %}
+            <h3>There are no uploaded images</h3>
+        {% endif %}
+    </div>
+
+{% endblock %}

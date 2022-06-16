@@ -1,0 +1,60 @@
+{% extends "base.twig" %}
+
+{% block title %} Profile | PixSalle {% endblock %}
+
+{% block main %}
+
+  <h1>Profile</h1>
+  
+  <form data-cy="sign-in" enctype="multipart/form-data" action="{{ formAction }}" method="POST" >
+    <div class="container">
+          {% if formData.pictureName != "" %}
+                <div class="username">
+                  <div class="userPicture" >
+                    <img src="/uploads/{{ formData.pictureName }}" alt="profilePicture" style="width:500;height:500;">
+                    <input type="submit" id="btnDelete" name="btnDelete" value="X" />
+                  </div>
+                </div>
+                 
+           {% endif %}
+           
+      <div class="username">
+        <input data-cy="" type="text" name="userName" value="{{ formData.userName }}">
+      </div>
+      {% if formErrors.userName %}
+          <p data-cy="sign-in__wrongUserName" style="color: red"> {{ formErrors.userName }} </p>
+      {% endif %}
+      <div class="email">
+        <input data-cy="sign-in__email" type="text" name="email" value="{{ formData.email }}" disabled>
+      </div>
+      <div class="phone">
+        <input data-cy="" type="text" name="phone" placeholder="Enter your phone" value="{{ formData.phone }}">
+      </div>
+      {% if formErrors.phone %}
+          <p data-cy="sign-in__wrongPhone" style="color: red"> {{ formErrors.phone }} </p>
+      {% endif %}
+      <div class="profile_picture">
+        <input data-cy="" type="file" name="files" >
+      </div>
+      {% if formErrors.profile_picture %}
+          <p data-cy="sign-in__wrongPhone" style="color: red"> {{ formErrors.profile_picture }} </p>
+      {% endif %}
+      &nbsp;
+      <div class="button">
+        <input data-cy="sign-in__btn" type="submit" class="profilebtn" value="SAVE CHANGES">
+          {# //  <input type="submit" id="btnDelete" name="btnDelete" value="Delete" /> #}
+
+          Change your password <a href="{{ url_for('change-password') }}"> here </a>
+        </span>
+        
+      </div>
+    </div>
+  </form>
+       {# {% if formData.pictureName == "" %}
+          <img src="/uploads/hola.png" alt="profilePicture" >
+      {% endif %} #}
+       
+  
+  
+  
+{% endblock %}

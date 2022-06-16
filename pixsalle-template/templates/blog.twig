@@ -1,0 +1,23 @@
+{% extends "base.twig" %}
+
+{% block title %}Blog | PixSalle{% endblock %}
+
+{% block main %}
+
+<h1> Blog </h1>
+
+     <div class="container-pictures">
+        {% if blogs %}
+        <div id="blog-list"><div>
+            {% for blog in blogs %}
+                <div class="pictures">
+                    <span> {{ blog.title }} </span>
+                </div>
+            {% endfor %}
+        {% else %}
+            <h3>There are no blogs yet</h3>
+        {% endif %}
+    </div>
+
+
+{% endblock %}

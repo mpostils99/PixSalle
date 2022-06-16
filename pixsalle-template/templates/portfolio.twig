@@ -1,0 +1,67 @@
+{% extends "base.twig" %}
+
+{% block title %} Portfolio | PixSalle {% endblock %}
+
+{% block main %}
+
+    {% if existantPortfolio == false %}
+        <h1> Create your own portfolio </h1>
+        <form data-cy="sign-in" action="{{ formAction }}" method="POST">
+            <div class="container">
+                <div class="title"> 
+                    <input data-cy="sign-in__email" type="text" name="title" placeholder="Enter your portoflio's title" size="30">
+                </div>
+                <div class="button">
+                    <input data-cy="sign-in__btn" type="submit" value="CREATE" class="createbtn">
+                </div>
+            </div>
+        </form>
+    {% else %}
+        <h1> {{ portfolioTitle }} </h1>
+        {% if existantAlbum == false %}
+            <h3> Create an album </h3>
+            <form data-cy="sign-in" action="{{ formAction }}" method="POST">
+                {% if userType == "Active" %}
+                <div class="container">
+                    <div class="name"> 
+                        <input data-cy="sign-in__email" type="text" name="albumName" placeholder="Enter your album's name" size="30">
+                    </div>
+                    <div class="button">
+                        <input data-cy="sign-in__btn" name="create-album" type="submit" value="CREATE" class="createbtn">
+                    </div>
+                </div>
+                {% else %}
+                    <br><br><span style="color: grey"> To create an album, you have to be an Active member. Go to MEMBERSHIP to chane your plan. </span>
+
+                {% endif %}
+            </form> 
+        {% else %}
+        <h3> Here are your albums </h3>
+        <div class="container">
+            {% for album in albums %}
+                <div class="album-container">
+                    <a class="album-list" href="/portfolio/album/{{album.id}}"> {{ album.name }} </a>
+                </div>
+            {% endfor %}
+            {% if userType == "Active" %}
+                <div class="container-new-album">
+                    <h3> Do you want to create a new album? </h3>
+                    <form data-cy="sign-in" action="{{ formAction }}" method="POST">
+                        <div class="container">
+                            <div class="name"> 
+                                <input data-cy="sign-in__email" type="text" name="albumName" placeholder="Enter your album's name" size="30">
+                            </div>
+                            <div class="button">
+                                <input data-cy="sign-in__btn" name="create-album" type="submit" value="CREATE" class="createbtn">
+                            </div>
+                        </div>  
+                    </form> 
+                </div>
+             {% else %}
+                <br><br><span style="color: grey"> To create an album, you have to be an Active member. Go to MEMBERSHIP to chane your plan. </span>
+             {% endif %}   
+        </div> 
+        {% endif %}        
+    {% endif %}
+
+{% endblock %}
